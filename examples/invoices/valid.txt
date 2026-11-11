@@ -1,0 +1,8 @@
+Supplier: Northline Studio
+Invoice: NS-1042
+Date: 2026-11-11
+Amount: 0.01
+Currency: NEAR
+Recipient: vendor.example.testnet
+Description: Accessibility review
+Due: 2026-11-14

@@ -1,0 +1,39 @@
+name: NEAR Sandbox verification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sandbox:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      RUSTUP_TOOLCHAIN: '1.99.1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24.22.1'
+          package-manager-cache: false
+      - name: Build the contract and run Rust tests
+        run: |
+          rustup toolchain install 1.99.1 --profile minimal --target wasm32-unknown-unknown
+          node scripts/build-contract.mjs
+          cargo test --locked --manifest-path contracts/paymandate/Cargo.toml --lib
+      - name: Install locked web dependencies
+        working-directory: apps/web
+        run: npm ci --no-audit --no-fund
+      - name: Verify the packaged contract interface
+        working-directory: apps/web
+        run: |
+          npm test
+          npm run test:wasm
+      - name: Run local NEAR Sandbox transactions
+        working-directory: apps/web
+        run: npm run test:sandbox

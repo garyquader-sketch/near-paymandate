@@ -1,0 +1,7 @@
+# PayMandate design prompt
+
+This prompt adapts Ravindra Nath Jha's [Admin Dashboard prompt](https://www.ravindranathjha.in/prompts/admin-dashboard-prompt), using Vercel's [product surface, context and constraints](https://vercel.com/blog/how-to-prompt-v0) structure. It was applied to the existing local Next.js application.
+
+> Redesign PayMandate as a daily payment review desk for an operator who needs to identify flagged invoices, check exact terms and confirm what settled. Use a deep navy space theme with a midnight-blue sidebar, blue-toned panels, a subtle stellar balance card, Instrument Sans and tabular financial values. Start with a prominent available balance, reserved funds and the current Testnet state. Follow with an actionable invoice review list and recent agent activity. Put the next relevant action next to its data. Preserve readable IDs and show the full approved recipient and amount before approval. Keep document text and extracted details easy to compare.
+>
+> On mobile, stack the workspace in reading order and keep navigation accessible. Use text and color together for review, rejection, uncertainty and verified settlement. Add useful empty states for missing accounts, disconnected RPC and no local invoices. Distinguish local analysis from finalized on-chain evidence. Display only records and metrics the existing APIs actually return. Every control must lead to a working action or explain its prerequisite. Verify keyboard navigation, 390 px width, read-only auditor access and the operator path from upload through invoice review.
